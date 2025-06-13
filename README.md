@@ -1,19 +1,25 @@
 # AskImmigrate: Navigate US Immigration with an AI SideKick 🤖🇺🇸
 ## AAIDC2025
-A developer repository and toolkit for building an AI-powered chat assistant that answers U.S. immigration questions using official forms, policy PDFs, and JSON data.
+
+AskImmigration is a helpful, easy-to-use assistant for navigating the U.S. immigration process. Whether you're applying for a visa, adjusting your status, or pursuing citizenship, it provides clear and reliable answers based on official immigration data.
+
+No legal jargon. No endless searching. Just straightforward guidance when you need it.
 
 ---
 
 ## Overview
 
-AskImmigrate gives everyone—from first-time applicants to experienced advocates—a friendly, conversational guide to U.S. immigration. It reads official forms, policy PDFs, and your own JSON data, then finds the exact passages you need. No more wrestling with legal jargon or searching through stacks of documents: just ask your question and get clear, reliable answers to help you move closer to your American Dream.
+AskImmigration is designed to make U.S. immigration easier to understand and less overwhelming. It reads and interprets government forms, policy documents, and visa requirements so you can focus on your next step, not paperwork.
+
+Instead of spending hours looking for answers, you can ask a simple question and receive a helpful, plain-language response. From first applications to final decisions, AskImmigration is here to support you throughout your journey.
 
 ## Target Audience
 
-- Anyone seeking clear, quick answers about U.S. immigration processes
+- Individuals applying for a visa, green card, or citizenship
 - Prospective immigrants planning for visas, green cards, or citizenship
-- Legal advocates and community organizations supporting applicants
-- Developers building chat-based or document-driven AI tools
+- Families supporting loved ones through the process
+- Students, workers, and visitors exploring U.S. immigration options
+- Community members and advocates seeking trusted information
 
 ## Prerequisites
 
