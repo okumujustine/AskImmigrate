@@ -14,4 +14,6 @@ rag_assistant_prompt:
   output_format:
     - Provide answers in markdown format.
     - Provide concise answers in bullet points when relevant.
+  reasoning_strategy: | 
+    Self-Ask
 
