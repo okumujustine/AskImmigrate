@@ -1,153 +1,138 @@
-# AskImmigrate-AAIDC2025
+# AskImmigrate - AAIDC: Navigate US Immigration with an AI SideKick 🤖🇺🇸
 
-This repository contains the practical code and exercises for **Week 3** of the Ready Tensor Agentic AI Certification program. Week 3 builds on the modular prompt engineering concepts introduced in Week 2 and adds practical examples of multi-turn conversations and robust system prompts.
+A developer repository and toolkit for building an AI-powered chat assistant that answers U.S. immigration questions using official forms, policy PDFs, and JSON data.
 
-## What You'll Learn
+---
 
-**Lesson 1 - Basic LLM Calls & Multi-Turn Conversations:**
+## Overview
 
-- Make your first LLM calls using LangChain and Groq.
-- Ground your questions in publication content for accurate, context-aware answers.
-- Explore how context is managed in multi-turn conversations.
+AskImmigrate gives everyone—from first-time applicants to experienced advocates—a friendly, conversational guide to U.S. immigration. It reads official forms, policy PDFs, and your own JSON data, then finds the exact passages you need. No more wrestling with legal jargon or searching through stacks of documents: just ask your question and get clear, reliable answers to help you move closer to your American Dream.
 
-**Lesson 2 - System Prompts for Control & Safety:**
+## Target Audience
 
-- Craft modular system prompts that define your assistant's behavior, boundaries, and tone.
-- Learn how to handle manipulative questions and safeguard your assistant's instructions.
-- See how small changes in your system prompt dramatically improve reliability and security.
+- Anyone seeking clear, quick answers about U.S. immigration processes
+- Prospective immigrants planning for visas, green cards, or citizenship
+- Legal advocates and community organizations supporting applicants
+- Developers building chat-based or document-driven AI tools
 
-You'll experiment with real-world scenarios, using a publication about Variational Autoencoders (VAEs) as the test case.
+## Prerequisites
 
-## Repository Structure
+- Python 3.10 or higher
+- Basic familiarity with Python scripting
+- Access to a Groq API key
+- Ability to install Python packages via pip
 
-```
+## Installation
 
-rt-agentic-ai-cert-week3/
-├── code/
-│   ├── config/
-│   │   ├── config.yaml                 # App config
-│   │   └── prompt_config.yaml          # Prompt configurations for system prompt examples
-│   ├── paths.py                        # File path configurations
-│   ├── prompt_builder.py               # Modular prompt construction functions
-│   ├── run_wk3_l1_example_1_2.py       # Lesson 1: Basic LLM calls and publication grounding
-│   ├── run_wk3_l1_example_3.py         # Lesson 1: Interactive terminal chat example
-│   ├── run_wk3_l2_sys_prompt_example.py # Lesson 2: System prompt examples and testing
-│   ├── run_wk3_l3a_memory_strategies.py # Lesson 3A: Memory strategies comparison
-│   ├── run_wk3_l4_vector_db_ingest.py  # Lesson 4: Vector DB ingestion script
-│   ├── run_wk3_l4_vector_db_rag.py     # Lesson 4: Vector DB RAG example
-│   └── utils.py                        # Utility functions
-├── data/                               # Sample publications for exercises
-│   ├── 57Nhu0gMyonV.md
-│   ├── ljGAbBceZbpv.md
-│   ├── tum5RnE4A5W8.md
-│   ├── yzN0OCQT7hUS-sample-questions.yaml  # Sample questions used in lesson 3 exercise
-│   └── yzN0OCQT7hUS.md
-├── outputs/                            # Generated prompts and LLM responses
-├── .gitignore
-├── LICENSE
-├── README.md
-└── requirements.txt
-
-```
-
-## Installation & Setup
-
-1. **Clone the repository:**
-
+1. Clone the repository:
    ```bash
-   git clone https://github.com/readytensor/rt-agentic-ai-cert-week3.git
-   cd rt-agentic-ai-cert-week3
+   git clone https://github.com/okumujustine/AskImmigrate.git
+   cd AskImmigrate
    ```
-
-2. **Install dependencies:**
-
+2. Install dependencies:
    ```bash
    pip install -r requirements.txt
    ```
 
-3. **Set up your Groq API key:**
+## Environment Setup
 
-   Create a `.env` file in the root directory and add your API key:
-
+1. Create a `.env` file in the project root.
+2. Add your Groq key:
+   ```bash
+   GROQ_API_KEY=your-groq-api-key
    ```
-   GROQ_API_KEY=your-api-key-here
+3. Ensure JSON and PDF source files are accessible on disk.
+
+## Usage
+
+### CLI Interface
+
+1. Ingest documents and JSON:
+   ```bash
+   python embed_documents.py
+   ```
+2. Launch the terminal chat with a question:
+   ```bash
+   python cli.py --question "What is the F1 visa?"
+   ```
+3. List all previous chat sessions:
+   ```bash
+   python cli.py --list_sessions
+   ```
+4. Continue a past session (replace \<session\_id> with the ID from list):
+   ```bash
+   python cli.py --session_id <session_id> --question "Next question text"
    ```
 
-   You can get your API key from [Groq](https://console.groq.com/).
+### React Application
 
----
+1. **Run the back-end server:**
+   ```bash
+   uvicorn app.main:app --reload --port 8000
+   ```
+2. Navigate to the `react-app` directory:
+   ```bash
+   cd react-app
+   ```
+3. Install frontend dependencies:
+   ```bash
+   npm install
+   ```
+4. Start the development server:
+   ```bash
+   npm run dev
+   ```
+5. Open your browser at [http://localhost:3000](http://localhost:3000) to chat with AskImmigrate in the web UI.
 
-## Running the Lessons
+## Methodology
 
-This repository includes scripts to help you experiment with different types of interactions and prompt configurations.
+1. **Ingestion**: split PDFs and JSON into text chunks
+2. **Embedding**: compute embeddings with HuggingFace MiniLM
+3. **Indexing**: store embeddings in Chroma vector DB
+4. **Prompt Construction**: build system and user prompts via LangChain
+5. **Query**: run semantic search + LLM call (Groq) to generate answers
 
-### Lesson 1 — Basic LLM Calls & Multi-Turn Conversations
+## Performance
 
-- **`run_wk3_l1_example_1_2.py`**
-
-  - **Example 1:** A simple LLM call answering a general question about VAEs.
-  - **Example 2:** The same question, but grounded in the publication content.
-
-- **`run_wk3_l1_example_3.py`**
-
-  - An **interactive terminal-based chat** with the assistant, showing how multi-turn conversations work and how context is managed.
-
-### Lesson 2 — System Prompts for Control & Safety
-
-- **`run_wk3_l2_sys_prompt_example.py`**
-
-  - Tests system prompt configurations (basic and advanced) to see how they handle manipulative questions and maintain professional tone and safety.
-
-### Lesson 3A — Memory Management Strategies
-
-- **`run_wk3_l3a_memory_strategies.py`**
-  - Compares three memory management strategies: stuffing everything, trimming to recent messages, and summarizing conversation history.
-  - Simulates a long conversation using real questions, saving detailed results (Q&A pairs, token usage, and final prompts) in the `outputs/` directory.
-  - Includes an interactive mode for running a single strategy or a full comparison report.
-
-### Lesson 4 — Vector Database & RAG Implementation
-
-- **`run_wk3_l4_vector_db_ingest.py`**
-
-  - **Vector Database Ingestion:** Initializes a ChromaDB instance with persistent storage, chunks publications into smaller documents, embeds them using HuggingFace transformers, and stores them in the vector database for semantic search.
-
-- **`run_wk3_l4_vector_db_rag.py`**
-
-  - **Retrieval-Augmented Generation (RAG):** Interactive terminal-based chat that retrieves relevant documents from the vector database based on user queries and generates contextual responses using retrieved content. Includes configurable similarity thresholds and result counts.
-
-Each script saves outputs and transcripts in the `outputs/` directory for easy review and comparison.
-
----
-
-## Key Features
-
-- **System Prompt Testing:** Explore how different system prompt configurations affect your assistant’s behavior, style, and security.
-- **Multi-Turn Conversations:** See how context builds up in an interactive chat, and how to manage it effectively.
-- **Real-World Examples:** Grounded in a research publication about Variational Autoencoders (VAEs) to simulate real user scenarios.
-- **Modular Approach:** Use the same modular components (role, tone, constraints) from Week 2, but applied in system prompts for reliability and trustworthiness.
-
----
-
-## How It Works
-
-The `prompt_builder.py` module takes YAML configurations and dynamically assembles system prompts. You can:
-
-- Adjust modular components like **role, tone, output constraints, and format**.
-- Test how small changes improve your assistant's reliability, especially for edge cases and manipulative questions.
-- Use real-world scenarios to refine your system prompts and see their impact.
-
----
+- Ingestion: \~100 documents per minute on moderate hardware
+- Query: <500 ms per lookup and response on GPU-enabled machine
+- Embedding dimension: 768 floats per chunk
 
 ## License
 
-This project is licensed under the MIT License – see the [LICENSE](LICENSE) file for details.
+This project is licensed under the MIT License. See [LICENSE](LICENSE) for details.
 
----
+## Contributing
+
+1. Fork the repo
+2. Create a feature branch
+3. Commit with clear messages
+4. Push to your fork
+5. Open a pull request
+
+## Changelog
+
+- **v1.0.0** (Jun 2025): Initial release with ingestion, indexing, chat interface
+
+## Citation
+
+If you use AskImmigrate in academic work, please cite:
+
+```
+Geoffrey Duncan Opiyo, Justine Okumu, Deo Mugabe, Hillary Arinda (2025). AskImmigrate: An AI-powered chat assistant for U.S. immigration. GitHub. https://github.com/okumujustine/AskImmigrate
+```
 
 ## Contact
 
-**Ready Tensor, Inc.**
+Maintainers:&#x20;
 
-- Email: contact at readytensor dot com
-- Issues & Contributions: Open an issue or pull request on this repository
-- Website: [Ready Tensor](https://readytensor.com)
+1. Geoffrey Duncan Opiyo ([dunkygeoffrey39@gmail.com](mailto\:dunkygeoffrey39@gmail.com))
+
+2. Justine Okumu ([okumujustine01@gmail.com](mailto\:okumujustine01@gmail.com))
+
+3. Deo Mugabe([deo.mugabe7@gmail.com](mailto\:deo.mugabe7@gmail.com))
+
+4. Hillary Arinda ([arinda.hillary@gmail.com](mailto\:arinda.hillary@gmail.com))
+
+   GitHub Issues: [https://github.com/okumujustine/AskImmigrate/issues](https://github.com/dunky-star/AskImmigrate/issues)
+
