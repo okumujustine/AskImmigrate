@@ -6,11 +6,11 @@ from pathlib import Path
 from typing import Union
 
 import chromadb
-import PyPDF2
 import torch
 import yaml
 from langchain_huggingface import HuggingFaceEmbeddings
 from langchain_text_splitters import RecursiveCharacterTextSplitter
+from pdfminer.high_level import extract_text
 from slugify import slugify
 
 from app.paths import DATA_DIR, VECTOR_DB_DIR
@@ -76,24 +76,11 @@ def load_json_publication(json_file):
 
 
 def load_pdf_publication(pdf_file: str) -> str:
-    publication_path = Path(os.path.join(DATA_DIR, pdf_file))
-    try:
-        with publication_path.open("rb") as f:
-            reader = PyPDF2.PdfReader(f)
-            text_parts = []
-            for page in reader.pages:
-                page_text = page.extract_text()
-                if page_text:
-                    text_parts.append(page_text)
-            text = "\n".join(text_parts)
-    except FileNotFoundError:
-        raise FileNotFoundError(f"PDF file not found: {publication_path}")
-    except Exception as e:
-        raise ValueError(f"Error reading PDF {publication_path}: {e}") from e
+    pdf_path = Path(os.path.join(DATA_DIR, pdf_file))
+    if not pdf_path.is_file():
+        raise FileNotFoundError(f"PDF file not found: {pdf_path}")
 
-    if not text:
-        raise ValueError(f"No extractable text found in {publication_path}")
-
+    text = extract_text(str(pdf_path))
     return text
 
 
@@ -103,8 +90,8 @@ def load_all_publications(publication_dir: str = DATA_DIR) -> list[str]:
     for pub_id in os.listdir(publication_dir):
         if pub_id.lower().endswith(".json"):
             publications.append(load_json_publication(pub_id))
-        # elif pub_id.lower().endswith(".pdf"):
-        #     publications.append(load_pdf_publication(pub_id))
+        elif pub_id.lower().endswith(".pdf"):
+            publications.append(load_pdf_publication(pub_id))
     custom_terminal_print("publictions loaded")
     return publications
 

@@ -17,6 +17,7 @@ dependencies = [
     "langchain-huggingface>=0.3.0",
     "langchain-openai>=0.3.22",
     "langgraph>=0.4.8",
+    "pdfminer-six>=20250506",
     "pymupdf>=1.26.0",
     "pypdf2>=3.0.1",
     "python-dotenv>=1.1.0",
