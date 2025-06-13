@@ -38,14 +38,14 @@ def chat_endpoint(req: ChatRequest):
             session_id = slugify_chat_session(req.question)
 
         answer = chat(session_id, req.question)
-        return {"answer": answer}
+        return {"answer": answer, "session_id": session_id}
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
 
 @app.get("/chat-sessions")
 def get_chat_sessions():
-    return {"all_sessions": list_sessions()}
+    return {"sessionIds": list_sessions()}
 
 
 @app.get("/history/{session_id}")
