@@ -13,3 +13,5 @@ wheels/
 .venv
 .env
 outputs/
+backup/
+{CHAT_HISTORY_DB_FPATH}

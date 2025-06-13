@@ -1,4 +1,4 @@
-# Ready Tensor Agentic AI Certification - Week 3
+# AskImmigrate-AAIDC2025
 
 This repository contains the practical code and exercises for **Week 3** of the Ready Tensor Agentic AI Certification program. Week 3 builds on the modular prompt engineering concepts introduced in Week 2 and adds practical examples of multi-turn conversations and robust system prompts.
 

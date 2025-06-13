@@ -35,19 +35,6 @@ def build_prompt_from_config(
     input_data: str = "",
     app_config: Optional[Dict[str, Any]] = None,
 ) -> str:
-    """Builds a complete prompt string based on a config dictionary.
-
-    Args:
-        config: Dictionary specifying prompt components.
-        input_data: Content to be summarized or processed.
-        app_config: Optional app-wide configuration (e.g., reasoning strategies).
-
-    Returns:
-        A fully constructed prompt as a string.
-
-    Raises:
-        ValueError: If the required 'instruction' field is missing.
-    """
     prompt_parts = []
 
     if role := config.get("role"):
