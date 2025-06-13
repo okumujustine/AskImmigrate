@@ -43,4 +43,3 @@ def list_sessions():
         return sessions
     except Exception:
         return []
-        return []
