@@ -1,5 +1,5 @@
-# AskImmigrate - AAIDC: Navigate US Immigration with an AI SideKick 🤖🇺🇸
-
+# AskImmigrate: Navigate US Immigration with an AI SideKick 🤖🇺🇸
+## AAIDC2025
 A developer repository and toolkit for building an AI-powered chat assistant that answers U.S. immigration questions using official forms, policy PDFs, and JSON data.
 
 ---
