@@ -27,17 +27,14 @@ export const useChat = () => {
       const fetchedSessionIds = await sessionApi.getSessionIds();
       setSessionIds(fetchedSessionIds);
       
-      // Set current session to the first one if none selected
-      if (!currentSessionId && fetchedSessionIds.length > 0) {
-        setCurrentSessionId(fetchedSessionIds[0]);
-      }
+      // Don't auto-select any session - user must click to select
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Failed to load sessions');
       console.error('Error loading session IDs:', err);
     } finally {
       setIsLoading(false);
     }
-  }, [currentSessionId]);
+  }, []);
 
   // Parse markdown history into messages
   const parseMarkdownHistory = (markdownHistory: string): Message[] => {
@@ -158,6 +155,12 @@ export const useChat = () => {
     await loadSessionHistory(sessionId);
   }, [loadSessionHistory]);
 
+  // Create new chat
+  const createNewChat = useCallback(() => {
+    setCurrentSessionId(null);
+    setError(null);
+  }, []);
+
   // Convert session IDs to session objects for display
   const sessions = sessionIds.map(id => {
     const loadedSession = loadedSessions.get(id);
@@ -180,6 +183,7 @@ export const useChat = () => {
     error,
     sendMessage,
     selectSession,
+    createNewChat,
     refreshSessions: loadSessionIds
   };
 };

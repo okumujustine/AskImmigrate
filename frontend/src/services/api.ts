@@ -36,7 +36,6 @@ export interface GetSessionHistoryResponse {
 }
 
 export const sessionApi = {
-
   getSessionIds: async (): Promise<string[]> => {
     try {
      

@@ -28,6 +28,7 @@ class ChatRequest(BaseModel):
 
 class ChatResponse(BaseModel):
     answer: str
+    session_id: str
 
 
 @app.post("/chat", response_model=ChatResponse)

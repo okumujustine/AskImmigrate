@@ -3,9 +3,7 @@ import { Header } from './components/Header';
 import { Sidebar } from './components/Sidebar';
 import { ChatInterface } from './components/ChatInterface';
 import { InputArea } from './components/InputArea';
-import { SettingsPanel } from './components/SettingsPanel';
 import { useChat } from './hooks/useChat';
-import { useSettings } from './hooks/useSettings';
 
 function App() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -20,18 +18,9 @@ function App() {
     error,
     sendMessage,
     selectSession,
+    createNewChat,
     refreshSessions
   } = useChat();
-
-  const {
-    preferences,
-    isSettingsOpen,
-    updatePreferences,
-    openSettings,
-    closeSettings,
-    exportData,
-    clearAllData
-  } = useSettings();
 
   const handleToggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
@@ -46,15 +35,21 @@ function App() {
     setIsSidebarOpen(false);
   };
 
+  const handleCreateNewChat = () => {
+    createNewChat();
+    setIsSidebarOpen(false);
+  };
+
   const currentSessionTitle = currentSession?.title || 'New Immigration Consultation';
 
   return (
-    <div className="flex h-screen bg-black">
+    <div className="flex h-screen bg-gradient-to-br from-white via-emerald-50/30 to-teal-50/30">
       {/* Sidebar */}
       <Sidebar
         sessions={sessions}
         currentSessionId={currentSessionId}
         onSelectSession={handleSelectSession}
+        onCreateNewChat={handleCreateNewChat}
         isOpen={isSidebarOpen}
         onClose={handleCloseSidebar}
         isLoading={isLoading}
@@ -65,7 +60,6 @@ function App() {
         {/* Header */}
         <Header
           onToggleSidebar={handleToggleSidebar}
-          onOpenSettings={openSettings}
           currentSessionTitle={currentSessionTitle}
         />
         
@@ -85,16 +79,6 @@ function App() {
           disabled={isTyping || isLoading || isLoadingMessages}
         />
       </div>
-      
-      {/* Settings Panel */}
-      <SettingsPanel
-        isOpen={isSettingsOpen}
-        onClose={closeSettings}
-        preferences={preferences}
-        onUpdatePreferences={updatePreferences}
-        onExportData={exportData}
-        onClearAllData={clearAllData}
-      />
     </div>
   );
 }
