@@ -37,7 +37,8 @@ Instead of spending hours looking for answers, you can ask a simple question and
    ```
 2. Install dependencies:
    ```bash
-   pip install -r requirements.txt
+   pip install uv
+   uv add pyproject.toml
    ```
 
 ## Environment Setup
