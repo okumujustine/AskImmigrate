@@ -88,7 +88,7 @@ Instead of spending hours looking for answers, you can ask a simple question and
    ```bash
    npm run dev
    ```
-5. Open your browser at [http://localhost:5713](http://localhost:5713) to chat with AskImmigrate in the web UI.
+5. Open your browser at [http://localhost:5173](http://localhost:5173) to chat with AskImmigrate in the web UI.
 
 ## Methodology
 
