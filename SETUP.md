@@ -2,7 +2,7 @@
 
 
 ### Documents embeddings
-`$ python load_data.py`
+`$ python embed_documents.py`
 
 ### To 
 `$ python cli.py  -l`
