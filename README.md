@@ -78,7 +78,7 @@ Instead of spending hours looking for answers, you can ask a simple question and
    ```
 2. Navigate to the `react-app` directory:
    ```bash
-   cd react-app
+   cd frontend
    ```
 3. Install frontend dependencies:
    ```bash
