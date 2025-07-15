@@ -74,7 +74,7 @@ Instead of spending hours looking for answers, you can ask a simple question and
 
 1. **Run the back-end server:**
    ```bash
-    uvicorn backend.code.api:app --host 0.0.0.0 --port 8088
+   uvicorn app.api:app --reload --port 9000
    ```
 2. Navigate to the `react-app` directory:
    ```bash
